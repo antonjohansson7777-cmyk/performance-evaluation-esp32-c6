@@ -1,0 +1,200 @@
+#include <string.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/event_groups.h"
+#include "esp_wifi.h"
+#include "esp_event.h"
+#include "esp_log.h"
+#include "esp_netif.h"
+#include "nvs_flash.h"
+#include "lwip/inet.h"
+#include "lwip/ip6_addr.h"
+#include "lwip/sockets.h"
+#include "esp_timer.h"
+#include "esp_task_wdt.h"
+
+#define AP_SSID           "ESP32-AP"
+#define AP_PASS           "12345678"
+#define MY_IPV6           "fe80::1"
+#define TARGET_IPV6       "fe80::2"
+#define UDP_PORT          3333
+#define LOAD_PORT         5001
+#define PING_DURATION_SEC 120
+#define LOAD_MBPS         20
+
+static const char *TAG = "enhet_a";
+static esp_netif_t *ap_netif = NULL;
+static EventGroupHandle_t wifi_events;
+#define CONNECTED_BIT BIT0
+
+static void udp_server_task(void *pvParameters)
+{
+    int sock = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+    if (sock < 0) { ESP_LOGE(TAG, "ping socket fel"); vTaskDelete(NULL); return; }
+
+    struct sockaddr_in6 src;
+    memset(&src, 0, sizeof(src));
+    src.sin6_family = AF_INET6;
+    src.sin6_addr = in6addr_any;
+    src.sin6_port = htons(UDP_PORT);
+    bind(sock, (struct sockaddr *)&src, sizeof(src));
+
+    ESP_LOGI(TAG, "Ping-server lyssnar på port %d", UDP_PORT);
+
+    char buf[128];
+    while (1) {
+        struct sockaddr_in6 from;
+        socklen_t fromlen = sizeof(from);
+        int len = recvfrom(sock, buf, sizeof(buf) - 1, 0,
+                          (struct sockaddr *)&from, &fromlen);
+        if (len > 0) {
+            buf[len] = 0;
+            char from_str[40];
+            inet6_ntoa_r(from.sin6_addr, from_str, sizeof(from_str));
+            ESP_LOGI(TAG, "Ping från %s: %s", from_str, buf);
+            const char *reply = "PONG";
+            sendto(sock, reply, strlen(reply), 0,
+                  (struct sockaddr *)&from, fromlen);
+        }
+    }
+    close(sock);
+    vTaskDelete(NULL);
+}
+
+static void load_client_task(void *pvParameters)
+{
+    vTaskDelay(pdMS_TO_TICKS(1000));
+
+    int sock = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+    if (sock < 0) { ESP_LOGE(TAG, "load socket fel"); vTaskDelete(NULL); return; }
+
+    int ifindex = esp_netif_get_netif_impl_index(ap_netif);
+
+    struct sockaddr_in6 dest;
+    memset(&dest, 0, sizeof(dest));
+    dest.sin6_family = AF_INET6;
+    inet6_aton(TARGET_IPV6, &dest.sin6_addr);
+    dest.sin6_port = htons(LOAD_PORT);
+    dest.sin6_scope_id = ifindex;
+
+    char target_str[40];
+    inet6_ntoa_r(dest.sin6_addr, target_str, sizeof(target_str));
+    ESP_LOGI(TAG, "Skickar load till: %s port %d", target_str, LOAD_PORT);
+
+    uint8_t buf[1400];
+    memset(buf, 0xAB, sizeof(buf));
+
+    uint32_t bytes_per_sec = LOAD_MBPS * 1000000 / 8;
+    uint32_t pkts_per_sec = bytes_per_sec / 1400;
+    int64_t us_per_pkt = (pkts_per_sec > 0) ? (1000000LL / pkts_per_sec) : 10000LL;
+
+    ESP_LOGI(TAG, "Load: %d Mbps, %lu paket/s, %lld us/paket",
+             LOAD_MBPS, pkts_per_sec, us_per_pkt);
+
+    uint32_t interval_bytes = 0;
+    int64_t last_report = esp_timer_get_time();
+    int64_t test_start = esp_timer_get_time();
+    int64_t next_send = esp_timer_get_time();
+
+    esp_task_wdt_add(NULL);
+
+    while ((esp_timer_get_time() - test_start) < (PING_DURATION_SEC * 1000000LL)) {
+        while (esp_timer_get_time() < next_send) {
+            vTaskDelay(1);
+        }
+        next_send += us_per_pkt;
+
+        int sent = sendto(sock, buf, sizeof(buf), 0,
+                         (struct sockaddr *)&dest, sizeof(dest));
+        if (sent > 0) {
+            interval_bytes += sent;
+        }
+
+        esp_task_wdt_reset();
+
+        int64_t now = esp_timer_get_time();
+        if (now - last_report >= 1000000LL) {
+            float mbps = (interval_bytes * 8.0f) / 1000000.0f;
+            ESP_LOGI(TAG, "Load skickat: %.2f Mbps (mål: %d Mbps)", mbps, LOAD_MBPS);
+            interval_bytes = 0;
+            last_report = now;
+        }
+    }
+
+    esp_task_wdt_delete(NULL);
+    close(sock);
+    ESP_LOGI(TAG, "Load klar!");
+    vTaskDelete(NULL);
+}
+
+static void event_handler(void *arg, esp_event_base_t base,
+                           int32_t id, void *data)
+{
+    if (base == WIFI_EVENT && id == WIFI_EVENT_AP_STACONNECTED) {
+        ESP_LOGI(TAG, "Enhet B anslöt!");
+        xEventGroupSetBits(wifi_events, CONNECTED_BIT);
+    } else if (base == IP_EVENT && id == IP_EVENT_GOT_IP6) {
+        ip_event_got_ip6_t *ev = (ip_event_got_ip6_t *)data;
+        char addr[40];
+        inet6_ntoa_r(ev->ip6_info.ip, addr, sizeof(addr));
+        ESP_LOGI(TAG, "IPv6 redo: %s", addr);
+    }
+}
+
+static void wifi_init_ap(void)
+{
+    wifi_events = xEventGroupCreate();
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    ap_netif = esp_netif_create_default_wifi_ap();
+
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+
+    esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, event_handler, NULL);
+    esp_event_handler_register(IP_EVENT, IP_EVENT_GOT_IP6, event_handler, NULL);
+
+    wifi_config_t ap_cfg = {
+        .ap = {
+            .ssid           = AP_SSID,
+            .password       = AP_PASS,
+            .ssid_len       = strlen(AP_SSID),
+            .channel        = 1,
+            .authmode       = WIFI_AUTH_WPA2_PSK,
+            .max_connection = 4,
+        }
+    };
+
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &ap_cfg));
+    ESP_ERROR_CHECK(esp_wifi_start());
+
+    ESP_ERROR_CHECK(esp_wifi_set_protocol(
+        WIFI_IF_AP,
+        WIFI_PROTOCOL_11B |
+        WIFI_PROTOCOL_11G |
+        WIFI_PROTOCOL_11N |
+        WIFI_PROTOCOL_11AX
+    ));
+
+    esp_netif_create_ip6_linklocal(ap_netif);
+
+    esp_ip6_addr_t my_addr;
+    inet6_aton(MY_IPV6, &my_addr);
+    esp_netif_add_ip6_address(ap_netif, my_addr, ESP_IP6_ADDR_IS_LINK_LOCAL);
+
+    ESP_LOGI(TAG, "AP startad: %s (Wi-Fi 6/ax)", AP_SSID);
+}
+
+void app_main(void)
+{
+    ESP_ERROR_CHECK(nvs_flash_init());
+    wifi_init_ap();
+
+    ESP_LOGI(TAG, "Väntar på att enhet B ansluter...");
+    xEventGroupWaitBits(wifi_events, CONNECTED_BIT, false, true, portMAX_DELAY);
+    ESP_LOGI(TAG, "Enhet B ansluten! Startar ping-server + load...");
+
+    xTaskCreate(udp_server_task, "ping_server", 4096, NULL, 5, NULL);
+    xTaskCreate(load_client_task, "load_client", 4096, NULL, 4, NULL);
+}

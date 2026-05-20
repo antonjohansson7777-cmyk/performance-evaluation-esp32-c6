@@ -1,0 +1,176 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red47\green180\blue29;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c20241\c73898\c14950;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 \CocoaLigature0 esp32c6> iperf -s -V -u -t 120\
+\cf3 I (4563354) IPERF: mode=udp-server sip=[::]:5001, dip=[::]:0, interval=3, time=120\cf2 \
+\cf3 I (4563354) iperf(id=1): [UDP Server] Socket created\cf2 \
+esp32c6> ot ping fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689 8 120 1[  1] local [::]:5001 connected to [FD3E:2E1A:FF2E:588D:3165:65FC:28C5:1689]:59005\
+\
+[ ID] Interval		Transfer	Bandwidth\
+esp32c6> ot ping fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689 8 120 1\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2043 hlim=255 time=654ms\
+[  1]  0.0- 3.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2045 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2046 hlim=255 time=1276ms\
+[  1]  3.0- 6.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2047 hlim=255 time=1480ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2048 hlim=255 time=1310ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2049 hlim=255 time=1290ms\
+[  1]  6.0- 9.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2050 hlim=255 time=1320ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2051 hlim=255 time=1326ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2052 hlim=255 time=1316ms\
+[  1]  9.0-12.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2053 hlim=255 time=1373ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2054 hlim=255 time=1430ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2055 hlim=255 time=1310ms\
+[  1] 12.0-15.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2056 hlim=255 time=1360ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2057 hlim=255 time=1430ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2058 hlim=255 time=1294ms\
+[  1] 15.0-18.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2059 hlim=255 time=1404ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2060 hlim=255 time=1350ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2061 hlim=255 time=1320ms\
+[  1] 18.0-21.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2062 hlim=255 time=1366ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2063 hlim=255 time=1417ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2064 hlim=255 time=1480ms\
+[  1] 21.0-24.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2065 hlim=255 time=1340ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2066 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2067 hlim=255 time=1440ms\
+[  1] 24.0-27.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2068 hlim=255 time=1304ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2069 hlim=255 time=1350ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2070 hlim=255 time=1390ms\
+[  1] 27.0-30.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2071 hlim=255 time=1320ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2072 hlim=255 time=1220ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2073 hlim=255 time=1334ms\
+[  1] 30.0-33.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2074 hlim=255 time=1310ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2075 hlim=255 time=1330ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2076 hlim=255 time=1350ms\
+[  1] 33.0-36.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2077 hlim=255 time=1300ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2078 hlim=255 time=1400ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2079 hlim=255 time=1426ms\
+[  1] 36.0-39.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2080 hlim=255 time=1264ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2081 hlim=255 time=1504ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2082 hlim=255 time=1334ms\
+[  1] 39.0-42.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2083 hlim=255 time=1250ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2084 hlim=255 time=1180ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2085 hlim=255 time=1370ms\
+[  1] 42.0-45.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2086 hlim=255 time=1364ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2087 hlim=255 time=1300ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2088 hlim=255 time=1350ms\
+[  1] 45.0-48.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2089 hlim=255 time=1397ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2090 hlim=255 time=1455ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2091 hlim=255 time=1450ms\
+[  1] 48.0-51.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2092 hlim=255 time=1394ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2093 hlim=255 time=1572ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2094 hlim=255 time=1486ms\
+[  1] 51.0-54.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2095 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2096 hlim=255 time=1247ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2097 hlim=255 time=1396ms\
+[  1] 54.0-57.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2098 hlim=255 time=1401ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2099 hlim=255 time=1370ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2100 hlim=255 time=1410ms\
+[  1] 57.0-60.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2101 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2102 hlim=255 time=1302ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2103 hlim=255 time=1390ms\
+[  1] 60.0-63.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2104 hlim=255 time=1410ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2105 hlim=255 time=1500ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2106 hlim=255 time=1390ms\
+[  1] 63.0-66.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2107 hlim=255 time=1374ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2108 hlim=255 time=1276ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2109 hlim=255 time=1396ms\
+[  1] 66.0-69.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2110 hlim=255 time=1254ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2111 hlim=255 time=1300ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2112 hlim=255 time=1337ms\
+[  1] 69.0-72.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2113 hlim=255 time=1354ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2114 hlim=255 time=1360ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2115 hlim=255 time=1344ms\
+[  1] 72.0-75.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2116 hlim=255 time=1234ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2117 hlim=255 time=1410ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2118 hlim=255 time=1480ms\
+[  1] 75.0-78.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2119 hlim=255 time=1270ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2120 hlim=255 time=1356ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2121 hlim=255 time=1210ms\
+[  1] 78.0-81.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2122 hlim=255 time=1374ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2123 hlim=255 time=1447ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2124 hlim=255 time=1370ms\
+[  1] 81.0-84.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2125 hlim=255 time=1434ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2126 hlim=255 time=1500ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2127 hlim=255 time=1356ms\
+[  1] 84.0-87.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2128 hlim=255 time=1320ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2129 hlim=255 time=1414ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2130 hlim=255 time=1512ms\
+[  1] 87.0-90.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2131 hlim=255 time=1373ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2132 hlim=255 time=1346ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2133 hlim=255 time=1370ms\
+[  1] 90.0-93.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2134 hlim=255 time=1420ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2135 hlim=255 time=1430ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2136 hlim=255 time=1340ms\
+[  1] 93.0-96.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2137 hlim=255 time=1406ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2138 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2139 hlim=255 time=1255ms\
+[  1] 96.0-99.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2140 hlim=255 time=1270ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2141 hlim=255 time=1390ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2142 hlim=255 time=1344ms\
+[  1] 99.0-102.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2143 hlim=255 time=1420ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2144 hlim=255 time=1460ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2145 hlim=255 time=1280ms\
+[  1] 102.0-105.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2146 hlim=255 time=1520ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2147 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2148 hlim=255 time=1470ms\
+[  1] 105.0-108.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2149 hlim=255 time=1360ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2150 hlim=255 time=1340ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2151 hlim=255 time=1380ms\
+[  1] 108.0-111.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2152 hlim=255 time=1426ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2153 hlim=255 time=1445ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2154 hlim=255 time=1330ms\
+[  1] 111.0-114.0 sec	0.02 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2155 hlim=255 time=1354ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2156 hlim=255 time=1354ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2157 hlim=255 time=1390ms\
+[  1] 114.0-117.0 sec	0.02 MBytes	0.05 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2158 hlim=255 time=1440ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2159 hlim=255 time=1534ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2160 hlim=255 time=1396ms\
+[  1] 117.0-120.0 sec	0.02 MBytes	0.05 Mbits/sec\
+[  1]  0.0-120.0 sec	0.84 MBytes	0.06 Mbits/sec\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2161 hlim=255 time=1484ms\
+16 bytes from fd3e:2e1a:ff2e:588d:3165:65fc:28c5:1689: icmp_seq=2162 hlim=255 time=1057ms\
+120 packets transmitted, 119 packets received. Packet loss = 0.8%. Round-trip min/avg/max = 654/1365.647/1572 ms.\
+Done}
